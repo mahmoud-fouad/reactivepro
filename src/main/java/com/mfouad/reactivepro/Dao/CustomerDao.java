@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import com.mfouad.reactivepro.DTO.Customer;
 
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 @Component
 public class CustomerDao {
@@ -43,5 +44,15 @@ public class CustomerDao {
        .map( i-> new Customer("cutomer "+i, i));
 
                  }
+
+// if the user cancel the http request ssytem will stop the loop and call onCancell method 
+  public Flux<Customer> getCustomersReactiveWithoutSleep(){
+       return Flux.range(1, count)
+       .doOnNext(i->System.out.println("processing in flux"+i))
+       .doOnCancel(()->System.out.println("user cancel the request"))
+       .map( i-> new Customer("cutomer "+i, i));
+
+                 }
+
     
 }

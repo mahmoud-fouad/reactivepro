@@ -1,6 +1,7 @@
 package com.mfouad.reactivepro.Router;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.WebProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -33,6 +34,11 @@ public class CutomerRouterConfig {
         .GET("/router/customer/{id}", customerByIdHandler::getCustomer)
         .POST("/router/customers/", addCutomerRouterHandler::addCustomer)
         .build();
+    }
+
+    @Bean
+    public WebProperties.Resources resources(){
+        return new WebProperties.Resources();
     }
     
 }

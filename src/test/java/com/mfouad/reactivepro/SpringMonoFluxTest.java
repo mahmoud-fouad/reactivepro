@@ -46,7 +46,7 @@ monString.subscribe(System.out::println,(e)->System.err.println(e));
     public void testFluxWithException(){
         Flux<?> fluxData= Flux.just("String","spring boot","microSevices")
         // use on error
-        .then(Flux.error(new RuntimeException("error in flux")))
+        .concatWith(Flux.error(new RuntimeException("error in flux")))
         .log();
         fluxData.subscribe(System.out::println,(e)-> System.err.println(e.getMessage()));
 
